@@ -1,0 +1,162 @@
+/*
+Icon classes can be used entirely standalone. They are named after their original file names.
+
+Example usage in HTML:
+
+`display: block` sprite:
+<div class="icon-home"></div>
+
+To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
+
+// CSS
+.icon {
+  display: inline-block;
+}
+
+// HTML
+<i class="icon icon-home"></i>
+*/
+.icon-danger_1 {
+  background-image: url(../img/icons_sprite.png);
+  background-position: 0px 0px;
+  width: 188px;
+  height: 191px;
+}
+.icon-danger_2 {
+  background-image: url(../img/icons_sprite.png);
+  background-position: -188px 0px;
+  width: 188px;
+  height: 191px;
+}
+.icon-danger_3 {
+  background-image: url(../img/icons_sprite.png);
+  background-position: -376px 0px;
+  width: 188px;
+  height: 191px;
+}
+.icon-first_list-type_arrow {
+  background-image: url(../img/icons_sprite.png);
+  background-position: -603px -308px;
+  width: 9px;
+  height: 31px;
+}
+.icon-first_list-type_plus {
+  background-image: url(../img/icons_sprite.png);
+  background-position: -160px -382px;
+  width: 9px;
+  height: 40px;
+}
+.icon-form_arrow {
+  background-image: url(../img/icons_sprite.png);
+  background-position: -564px 0px;
+  width: 49px;
+  height: 233px;
+}
+.icon-form_delivery {
+  background-image: url(../img/icons_sprite.png);
+  background-position: -529px -191px;
+  width: 27px;
+  height: 15px;
+}
+.icon-form_name {
+  background-image: url(../img/icons_sprite.png);
+  background-position: -510px -191px;
+  width: 19px;
+  height: 23px;
+}
+.icon-form_phone {
+  background-image: url(../img/icons_sprite.png);
+  background-position: -590px -382px;
+  width: 21px;
+  height: 24px;
+}
+.icon-form_protected {
+  background-image: url(../img/icons_sprite.png);
+  background-position: -510px -214px;
+  width: 19px;
+  height: 20px;
+}
+.icon-fungus {
+  background-image: url(../img/icons_sprite.png);
+  background-position: -475px -256px;
+  width: 81px;
+  height: 56px;
+}
+.icon-header_achievement_1 {
+  background-image: url(../img/icons_sprite.png);
+  background-position: -564px -308px;
+  width: 39px;
+  height: 39px;
+}
+.icon-header_achievement_2 {
+  background-image: url(../img/icons_sprite.png);
+  background-position: -564px -382px;
+  width: 26px;
+  height: 41px;
+}
+.icon-header_achievement_3 {
+  background-image: url(../img/icons_sprite.png);
+  background-position: -564px -347px;
+  width: 40px;
+  height: 35px;
+}
+.icon-instruction_1 {
+  background-image: url(../img/icons_sprite.png);
+  background-position: 0px -191px;
+  width: 135px;
+  height: 135px;
+}
+.icon-instruction_2 {
+  background-image: url(../img/icons_sprite.png);
+  background-position: -270px -191px;
+  width: 135px;
+  height: 135px;
+}
+.icon-instruction_3 {
+  background-image: url(../img/icons_sprite.png);
+  background-position: -135px -191px;
+  width: 135px;
+  height: 135px;
+}
+.icon-many-inefficient_1 {
+  background-image: url(../img/icons_sprite.png);
+  background-position: -405px -256px;
+  width: 70px;
+  height: 66px;
+}
+.icon-many-inefficient_2 {
+  background-image: url(../img/icons_sprite.png);
+  background-position: -564px -233px;
+  width: 48px;
+  height: 75px;
+}
+.icon-many-inefficient_3 {
+  background-image: url(../img/icons_sprite.png);
+  background-position: 0px -431px;
+  width: 59px;
+  height: 63px;
+}
+.icon-ours-effectively_1 {
+  background-image: url(../img/icons_sprite.png);
+  background-position: -405px -191px;
+  width: 105px;
+  height: 65px;
+}
+.icon-ours-effectively_2 {
+  background-image: url(../img/icons_sprite.png);
+  background-position: 0px -326px;
+  width: 160px;
+  height: 105px;
+}
+.icon-ours-effectively_3 {
+  background-image: url(../img/icons_sprite.png);
+  background-position: -160px -326px;
+  width: 80px;
+  height: 56px;
+}
+.icon-statistic {
+  background-image: url(../img/icons_sprite.png);
+  background-position: -240px -326px;
+  width: 55px;
+  height: 37px;
+}

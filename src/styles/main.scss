@@ -1,0 +1,1270 @@
+@charset "UTF-8";
+
+@import "libs/reset";
+@import "../../public/img/sprite";
+@import "var";
+
+.clearfix:after{
+	clear   : both;
+	content : "";
+	display : table;
+}
+
+.color-orange{ color : map_get($colors, "orange"); }
+
+%item_hover-effect{
+	transform : translateY(-4px);
+}
+
+%icon{
+	content : "";
+	display : inline-block;
+}
+
+%underline{
+	display     : inline-block;
+	position    : relative;
+	line-height : .85;
+	
+	&:after{
+		width   : 100%;
+		height  : 4px;
+		content : "";
+		display : block;
+	}
+}
+
+.underline-orange{
+	@extend %underline;
+	
+	&:after{ background-color : map_get($colors, "orange"); }
+}
+
+.underline-green{
+	@extend %underline;
+	
+	&:after{ background-color : map_get($colors, "green"); }
+}
+
+%final-block{
+	color         : map_get($colors, "black");
+	border        : 3px solid map_get($colors, "ivory");
+	padding       : 40px 68px 38px;
+	position      : relative;
+	font-size     : 1.3125em;
+	line-height   : 1.273;
+	border-radius : 5px;
+}
+
+body{
+	font-size   : 16px;
+	font-family : "Roboto", sans-serif;
+}
+
+.container{
+	margin    : 0 auto;
+	max-width : $desktop_max_width;
+}
+
+h1, h2, h3{ margin : 0; }
+
+h1{
+	color       : map_get($colors, "black_bold");
+	font-size   : 2.75em;
+	line-height : 1;
+	
+	small{
+		display    : block;
+		font-size  : 73%;
+		margin-top : 5px;
+	}
+}
+
+h2{
+	color       : map_get($colors, "black_bold");
+	font-size   : 3em;
+	text-align  : center;
+	line-height : 1;
+}
+
+section{
+	padding    : 92px 0;
+	position   : relative;
+	text-align : center;
+	
+	&:nth-child(2n - 1){
+		background-color : map_get($colors, "blue_light");
+	}
+	
+	&:before{
+		@extend %icon;
+		@extend .icon-fungus;
+		margin-top : 18px;
+	}
+}
+
+.first{
+	$top_offset : 46px;
+	position    : relative;
+	padding-top : 0;
+	
+	&:before{ content : none; }
+	
+	&_header{
+		padding  : 0 calc((100% - #{$desktop_max_width}) / 2);
+		z-index  : 2;
+		position : relative;
+		
+		&_wrapper{
+			width       : $desktop_max_width;
+			display     : flex;
+			padding     : 14px 0 0 222px;
+			position    : relative;
+			box-sizing  : border-box;
+			line-height : 1.125;
+		}
+		
+		&_logo{
+			width           : 400px;
+			display         : flex;
+			flex-wrap       : nowrap;
+			align-items     : center;
+			justify-content : flex-start;
+			
+			&:before{
+				@extend %icon;
+				@extend .icon-fungus;
+				margin-right : 16px;
+			}
+			
+			&_txt{
+				color       : map_get($colors, "black_bold");
+				font-size   : 1.375em;
+				line-height : 1.818;
+				font-weight : 600;
+				
+			}
+		}
+		
+		&_achievements{
+			&_list{
+				color           : map_get($colors, "gray_dark");
+				display         : flex;
+				font-style      : italic;
+				text-align      : center;
+				line-height     : 1.125;
+				list-style-type : none;
+				justify-content : space-between;
+			}
+			
+			&_item{
+				$count_items : 3;
+				$class-slug : icon-header_achievement !default;
+				display         : flex;
+				//flex-direction  : column;
+				flex-direction  : row;
+				justify-content : space-around;
+				
+				&:before{
+					@extend %icon;
+					//margin  : 0 auto 12px;
+					//display : inline-block;
+				}
+				
+				@for $i from 1 through $count_items{
+					&:nth-child(#{$i}):before{
+						@extend .#{$class-slug}_#{$i};
+					}
+				}
+				
+				&_txt{
+					display      : inline-block;
+					max-width    : 75%;
+					text-align   : left;
+					padding-left : 12px;
+				}
+			}
+		}
+	}
+	
+	&_body{
+		margin     : 46px auto 0;
+		display    : flex;
+		position   : relative;
+		max-width  : $desktop_max_width;
+		box-sizing : border-box;
+		text-align : left;
+	}
+	
+	&_bg-img_desk{ display : none; }
+	
+	&_img, &_content{ width : 50%; }
+	
+	@media screen and (min-width : 1280px){
+		&_bg-img_mob{ display : none; }
+		
+		&_img{
+			width    : 42.5%;
+			display  : block;
+			z-index  : 1;
+			position : relative;
+		}
+		
+		&_bg-img_desk{
+			$bottom : 168px;
+			$header_height : 103px;
+			width    : auto;
+			right    : -142px;
+			height   : calc(100% + #{$top_offset + $bottom + $header_height});
+			bottom   : -$bottom;
+			display  : block;
+			z-index  : -1;
+			position : absolute;
+		}
+	}
+	
+	&_content{
+		width    : 396px;
+		z-index  : 1;
+		position : relative;
+	}
+	
+	&_advantages{
+		$list-style_size : 46px;
+		$list-style_offset : 26px;
+		font-size  : 20px;
+		margin-top : 42px;
+		
+		&_list{
+			list-style-type : none;
+			
+			&-type{
+				color            : white;
+				width            : $list-style_size;
+				height           : $list-style_size;
+				display          : inline-block;
+				box-shadow       : 0 0 0 7px rgb(232, 237, 201);
+				text-align       : center;
+				line-height      : $list-style_size;
+				font-weight      : 700;
+				margin-left      : 10px;
+				margin-right     : $list-style_offset;
+				border-radius    : 50%;
+				background-color : map_get($colors, "green_light");
+			}
+		}
+		
+		&_item{
+			display     : flex;
+			margin-top  : 36px;
+			align-items : center;
+			
+			&:first-child{ margin-top : 0; }
+			
+			&:nth-child(2){
+				$offset : -50%;
+				position : relative;
+				
+				&:before, &:after{
+					@extend %icon;
+					left     : 28px;
+					position : absolute;
+				}
+				
+				&:before{
+					@extend .icon-first_list-type_arrow;
+					top : $offset;
+				}
+				
+				&:after{
+					@extend .icon-first_list-type_plus;
+					bottom : $offset;
+				}
+			}
+		}
+		
+		&_txt{
+			width       : calc(100% - #{$list-style_size + $list-style_offset});
+			color       : map_get($colors, "black");
+			line-height : 1.2;
+		}
+	}
+}
+
+.form{
+	$vertical_offset : 16px;
+	$border_size : 7px;
+	$border_radius : 20px;
+	$border : $border_size solid map_get($colors, "green_light") ;
+	top              : 5px;
+	right            : 0;
+	width            : $form_width;
+	border           : $border;
+	padding          : 0 $vertical_offset;
+	position         : absolute;
+	text-align       : center;
+	box-sizing       : border-box;
+	border-radius    : $border_radius;
+	background-color : white;
+	
+	&_header{
+		width          : 138px;
+		margin         : -$border_size auto 0;
+		z-index        : 1;
+		position       : relative;
+		border-radius  : 0 0 $border_radius $border_radius;
+		padding-bottom : 10px;
+		
+		&_txt{
+			&:before{
+				@extend %icon;
+				@extend .icon-form_delivery;
+				margin-right : 6px;
+			}
+		}
+		
+		&:before{
+			top              : 0;
+			left             : 0;
+			width            : 100%;
+			height           : 100%;
+			content          : "";
+			z-index          : -1;
+			display          : block;
+			position         : absolute;
+			border-radius    : 0 0 $border_radius * .75 $border_radius * .75;
+			background-color : map_get($colors, "blue_light");
+		}
+		
+		&:after{
+			top              : 0;
+			left             : -$border_size;
+			width            : calc(100% + #{$border_size * 2});
+			height           : calc(100% + #{$border_size});
+			content          : "";
+			z-index          : -2;
+			display          : block;
+			position         : absolute;
+			border-radius    : 0 0 $border_radius $border_radius;
+			background-color : map_get($colors, "green_light");
+		}
+	}
+	
+	&_title{
+		margin-top     : 24px;
+		letter-spacing : .5px;
+	}
+	
+	&_price{
+		margin          : 10px 0 14px;
+		display         : flex;
+		position        : relative;
+		justify-content : space-around;
+		
+		&_value{
+			font-size  : 2.125em;
+			margin-top : 5px;
+			
+			span{
+				&:after{
+					content : "₽";
+				}
+			}
+		}
+		
+		&_old, &_new{ width : 46%; }
+		
+		&_old{
+			.form_price_value{
+				$angle : 12.5deg;
+				position : relative;
+				
+				&:before, &:after{
+					$height : 1px;
+					top              : calc(50% - #{$height / 2});
+					left             : 6%;
+					width            : 85%;
+					height           : $height;
+					content          : "";
+					display          : block;
+					position         : absolute;
+					background-color : red;
+				}
+				
+				&:before{ transform : rotateZ($angle); }
+				
+				&:after{ transform : rotateZ(-$angle); }
+			}
+		}
+		
+		&_new{
+			.form_price_txt{ font-weight : 600; }
+			
+			.form_price_value{
+				font-weight      : 900;
+				border-radius    : 5px;
+				background-color : map_get($colors, "yellow");
+			}
+		}
+		
+		&:after{
+			@extend %icon;
+			@extend .icon-form_arrow;
+			top      : 42px;
+			right    : -50px;
+			position : absolute;
+		}
+	}
+	
+	&_label{
+		display    : block;
+		position   : relative;
+		margin-top : 12px;
+		
+		&.submit{
+			$inner_border_radius : 32px;
+			cursor           : pointer;
+			padding          : 18px 0;
+			position         : relative;
+			font-size        : 1.75em;
+			font-weight      : bold;
+			line-height      : 0.786;
+			border-radius    : $inner_border_radius;
+			background-color : map_get($colors, "yellow");
+			
+			small{
+				display    : block;
+				font-size  : 0.575em;
+				margin-top : 3px;
+			}
+			
+			input{
+				top      : 0;
+				left     : 0;
+				width    : 100%;
+				height   : 100%;
+				opacity  : 0;
+				position : absolute;
+			}
+			
+			&:after{
+				top           : $border_size;
+				left          : $border_size;
+				width         : calc(100% - #{$border_size * 2});
+				height        : calc(100% - #{$border_size * 2});
+				border        : 1px solid white;
+				content       : "";
+				display       : block;
+				position      : absolute;
+				border-radius : $inner_border_radius;
+			}
+		}
+		
+		&.name, &.phone{
+			&:before{
+				@extend %icon;
+				top       : 50%;
+				left      : 23px;
+				position  : absolute;
+				transform : translate(0, -50%);
+			}
+		}
+		
+		&.name{
+			&:before{ @extend .icon-form_name; }
+		}
+		
+		&.phone{
+			&:before{ @extend .icon-form_phone; }
+		}
+	}
+	
+	&_input:not(.submit){
+		$padding_vertical : 23px;
+		$padding_left : 55px;
+		$padding_right : 25px;
+		width            : 100%;
+		border           : none;
+		padding          : $padding_vertical 25px $padding_vertical 55px;
+		outline          : none;
+		transition       : $transition;
+		box-sizing       : border-box;
+		border-radius    : 100px;
+		background-color : map_get($colors, "blue_light");
+		
+		&:hover, :active{
+			box-shadow : inset 0 0 10px 0 rgba(0, 0, 0, .2);
+		}
+	}
+	
+	&_left{
+		color       : map_get($colors, "black_bold");
+		font-size   : 1.125em;
+		margin-top  : 19px;
+		line-height : 1;
+		
+		var{
+			color      : map_get($colors, "green");
+			font-style : normal;
+		}
+	}
+	
+	&_footer{
+		color            : map_get($colors, "gray_dark");
+		margin           : 14px #{-$vertical_offset} 0;
+		padding          : 13px $vertical_offset;
+		font-size        : .875em;
+		line-height      : 1.18;
+		border-radius    : 0 0 $border_radius $border_radius;
+		background-color : map_get($colors, "blue_light");
+		
+		&_txt{
+			&:before{
+				@extend %icon;
+				@extend .icon-form_protected;
+				margin : 0 12px -4px 0;
+			}
+		}
+	}
+}
+
+.danger{
+	text-align : center;
+	
+	&_title-after{
+		color       : rgb(43, 40, 40);
+		display     : inline-block;
+		font-size   : 1.5em;
+		margin-top  : 34px;
+		font-weight : bold;
+		line-height : 1.167;
+	}
+	
+	&_list{
+		display         : flex;
+		margin-top      : 28px;
+		list-style-type : none;
+		justify-content : space-between;
+	}
+	
+	&_item{
+		$icon_size : 188px;
+		$count_items : 3;
+		$class-slug : icon-danger !default;
+		width      : 30%;
+		transition : $transition;
+		text-align : left;
+		
+		@for $i from 1 through $count_items{
+			&:nth-child(#{$i}) &_title:before{
+				@extend %icon;
+				@extend .#{$class-slug}_#{$i};
+			}
+		}
+		
+		&_title{
+			color       : rgb(0, 0, 0);
+			display     : flex;
+			font-size   : 1.357em;
+			text-align  : left;
+			box-sizing  : border-box;
+			line-height : 1.182;
+			font-weight : 600;
+			align-items : center;
+			
+			span{
+				width        : calc(100% - #{$icon_size});
+				box-sizing   : border-box;
+				padding-left : 18px;
+			}
+		}
+		
+		&_hr{
+			width            : 24px;
+			margin           : 30px 0 0;
+			border           : none;
+			height           : 4px;
+			display          : block;
+			background-color : rgb(190, 203, 216);
+		}
+		
+		&_description{
+			color       : map_get($colors, "black");
+			margin      : 10px 0 0;
+			font-size   : 1.125em;
+			line-height : 1.556;
+		}
+		
+		&:hover{
+			@extend %item_hover-effect;
+		}
+	}
+	
+	&_statistic{
+		@extend %final-block;
+		margin   : 70px 0 0;
+		position : relative;
+		
+		&:before{
+			@extend %icon;
+			@extend .icon-statistic;
+			$border : 58px solid white;
+			top              : 0;
+			left             : 50%;
+			position         : absolute;
+			transform        : translate(-50%, -50%);
+			border-left      : $border;
+			border-right     : $border;
+			background-color : white;
+		}
+	}
+}
+
+.many-inefficient{
+	&_list{
+		display         : flex;
+		margin-top      : 80px;
+		list-style-type : none;
+		justify-content : space-between;
+	}
+	
+	&_item{
+		width            : 31.5%;
+		padding          : 63px 25px 35px;
+		position         : relative;
+		border-top       : 5px solid map_get($colors, "green_light");
+		text-align       : center;
+		box-sizing       : border-box;
+		transition       : $transition;
+		border-radius    : 7px;
+		background-color : white;
+		
+		$icon_size : 100px;
+		$count_items : 3;
+		$class-slug : icon-many-inefficient !default;
+		
+		@for $i from 1 through $count_items{
+			&:nth-child(#{$i}):before{
+				top              : $icon_size / -2;
+				left             : 50%;
+				width            : $icon_size;
+				height           : $icon_size;
+				content          : "";
+				position         : absolute;
+				transform        : translate(-50%, 0);
+				border-radius    : 50%;
+				background-color : map_get($colors, "blue_light");
+			}
+			
+			&:nth-child(#{$i}):after{
+				@extend %icon;
+				@extend .#{$class-slug}_#{$i};
+				top       : 0;
+				left      : 50%;
+				position  : absolute;
+				transform : translate(-50%, -50%);
+			}
+		}
+		
+		&_title{
+			display       : inline-block;
+			font-size     : 1.5em;
+			font-weight   : bold;
+			margin-bottom : 9px;
+			
+			&-after{
+				color         : rgb(34, 34, 34);
+				font-size     : 1.125em;
+				font-weight   : 600;
+				line-height   : 1.5;
+				margin-bottom : 47px;
+			}
+		}
+		
+		&_examples{
+			$line_height : 1.4em;
+			color       : map_get($colors, "black");
+			display     : block;
+			font-size   : 1em;
+			font-style  : italic;
+			min-height  : $line_height;
+			line-height : $line_height;
+			font-weight : 400;
+		}
+		
+		&_but{
+			$border : 1px solid rgb(210, 220, 230);
+			$top : -28px;
+			@extend .color-orange;
+			margin      : 53px 0 0;
+			position    : relative;
+			font-size   : 1.375em;
+			font-weight : 900;
+			
+			&:before{
+				top        : $top;
+				left       : 0;
+				width      : 100%;
+				content    : "";
+				display    : inline-block;
+				position   : absolute;
+				border-top : $border;
+			}
+			
+			&:after{
+				$size : 30px;
+				top              : $size / -2 + $top;
+				left             : calc(50% - #{$size / 2});
+				width            : $size;
+				height           : $size;
+				content          : "";
+				display          : inline-block;
+				position         : absolute;
+				transform        : rotate(45deg);
+				border-right     : $border;
+				border-bottom    : $border;
+				background-color : white;
+			}
+		}
+		
+		&_description{
+			color       : map_get($colors, "black");
+			margin      : 10px 0 0;
+			position    : relative;
+			font-size   : 1.125em;
+			line-height : 1.45;
+			
+			b{ color : black; }
+		}
+		
+		&:hover{
+			@extend %item_hover-effect;
+		}
+	}
+	
+	&_conclusion{
+		@extend %final-block;
+		margin     : 70px 0 0;
+		position   : relative;
+		text-align : center;
+		
+		&:before{
+			$border : 58px solid map_get($colors, "blue_light");
+			top              : 0;
+			left             : 50%;
+			color            : map_get($colors, "ivory");
+			content          : "!";
+			position         : absolute;
+			font-size        : 72px;
+			transform        : translate(-50%, -50%);
+			font-weight      : 700;
+			border-left      : $border;
+			border-right     : $border;
+			background-color : transparent;
+		}
+		
+		&:after{
+			top         : 0;
+			left        : 50%;
+			color       : black;
+			content     : "ВЫВОД";
+			position    : absolute;
+			transform   : translate(-50%, -50%);
+			font-weight : 700;
+		}
+	}
+}
+
+.ours-effectively{
+	text-align : center;
+	
+	&_after-title{
+		@extend .danger_title-after;
+	}
+	
+	&_list{
+		display         : flex;
+		margin-top      : 88px;
+		list-style-type : none;
+		justify-content : space-between;
+	}
+	
+	&_item{
+		$icon_size : 120px;
+		$count_items : 3;
+		$vertical_padding : 10px;
+		$class-slug : icon-ours-effectively !default;
+		width         : calc(30% + #{$vertical_padding * 2});
+		border        : 4px solid map_get($colors, "orange");
+		padding       : 76px $vertical_padding 4px;
+		position      : relative;
+		box-sizing    : border-box;
+		transition    : $transition;
+		border-radius : 5px;
+		
+		&:before{
+			@extend .many-inefficient_item:before;
+		}
+		
+		&:after{
+			@extend .many-inefficient_item:after;
+		}
+		
+		@for $i from 1 through $count_items{
+			&:nth-child(#{$i}):before{
+				top              : $icon_size / -2;
+				left             : 50%;
+				width            : $icon_size;
+				height           : $icon_size;
+				content          : "";
+				position         : absolute;
+				transform        : translate(-50%, 0);
+				border-radius    : 50%;
+				background-color : white;
+			}
+			
+			&:nth-child(#{$i}):after{
+				@extend %icon;
+				@extend .#{$class-slug}_#{$i};
+				top       : 0;
+				left      : 50%;
+				position  : absolute;
+				transform : translate(-50%, calc(-50% - 18px))
+			}
+		}
+		
+		&_title{
+			display     : block;
+			font-size   : 1.5em;
+			font-weight : bold;
+			line-height : 1.167;
+		}
+		
+		&_description{
+			display     : block;
+			font-size   : 1.125em;
+			margin-top  : 10px;
+			line-height : 1.444;
+		}
+		
+		&:last-child{ border-color : map_get($colors, "green"); }
+		
+		&:hover{
+			@extend %item_hover-effect;
+		}
+	}
+	
+	&_question{
+		$border_radius : 5px;
+		width         : 73%;
+		margin        : 32px auto 0;
+		padding       : 32px 0;
+		position      : relative;
+		font-size     : 1.6875em;
+		line-height   : 0.982;
+		background    : white;
+		border-radius : $border_radius;
+		
+		:after{
+			$border_size : 4px;
+			top           : -$border_size;
+			left          : -$border_size;
+			width         : calc(100% + #{$border_size * 2});
+			height        : calc(100% + #{$border_size * 2});
+			content       : "";
+			display       : block;
+			z-index       : -1;
+			position      : absolute;
+			background    : linear-gradient(45deg, map_get($colors, "orange"), map_get($colors, "green"));
+			border-radius : $border_radius;
+		}
+	}
+}
+
+.instruction{
+	&_img{
+		img{
+			float : right;
+			width : auto;
+		}
+	}
+	
+	&_content{
+		display    : flex;
+		margin-top : 106px;
+	}
+	
+	&_img, &_list{
+		width : 50%;
+	}
+	
+	&_list{
+		margin-top      : -28px;
+		text-align      : left;
+		list-style-type : none;
+	}
+	
+	&_item{
+		display      : flex;
+		font-size    : 1.125em;
+		transition   : $transition;
+		margin-top   : 16px;
+		line-height  : 1.444;
+		align-items  : center;
+		padding-left : 20px;
+		
+		&:before{
+			@extend %icon;
+			margin-right : 28px;
+		}
+		
+		$icon_size : 100px;
+		$count_items : 3;
+		$class-slug : icon-instruction !default;
+		
+		@for $i from 1 through $count_items{
+			&:nth-child(#{$i}):before{
+				@extend .#{$class-slug}_#{$i};
+			}
+		}
+		
+		span{
+			display  : inline-block;
+			position : relative;
+			
+			&:before{
+				top              : -16px;
+				left             : 0;
+				width            : 24px;
+				height           : 4px;
+				content          : "";
+				display          : block;
+				position         : absolute;
+				background-color : map_get($colors, "green");
+			}
+		}
+		
+		&:first-child{
+			margin-top : 0;
+		}
+		
+		&:hover{ @extend %item_hover-effect; }
+	}
+}
+
+@media screen and (max-width : map_get($media, "mobile-max-width")){
+	html{
+		width : 100vw;
+		overflow : hidden auto;
+	}
+	
+	body{ font-size : 14px; }
+	
+	section{ padding : 46px 0; }
+	
+	h1{ text-align : center; }
+	
+	h2{ font-size : 2em; }
+	
+	.container{
+		width     : calc(100% - 24px);
+		max-width : 480px;
+	}
+	
+	.first{
+		&_header{
+			padding    : 0;
+			text-align : center;
+			
+			&_wrapper{
+				width   : auto;
+				padding : 0;
+			}
+			
+			&_logo{
+				width           : 100%;
+				justify-content : center;
+			}
+			
+			&_achievements{
+				&_list{
+					display : none;
+				}
+			}
+		}
+		
+		&_body{
+			display   : block;
+			max-width : none;
+		}
+		
+		&_img, &_content{ width : auto; }
+		
+		&_advantages{
+			&_item{
+				&:nth-child(2){
+					$offset : -85%;
+					
+					&:before, &:after{
+						left     : 28px;
+						position : absolute;
+					}
+					
+					&:before{ top : $offset; }
+					
+					&:after{ bottom : $offset; }
+				}
+			}
+		}
+	}
+	
+	.form{
+		margin   : 24px auto 0;
+		display  : block;
+		position : static;
+	}
+	
+	.danger{
+		&_title-after{ font-size : 22px; }
+		
+		&_list{ display : block; }
+		
+		&_item{
+			width      : auto;
+			display    : block;
+			text-align : center;
+			margin-top : 24px;
+			
+			&_title{
+				display    : block;
+				text-align : center;
+				
+				&:before{
+					margin  : 0 auto 8px;
+					display : block !important;
+				}
+			}
+			
+			&_hr{
+				margin-left  : auto;
+				margin-right : auto;
+				margin-top   : 12px;
+			}
+		}
+		
+		&_statistic{
+			$padding : 12px;
+			padding-left  : $padding;
+			padding-right : $padding;
+		}
+	}
+	
+	.many-inefficient{
+		&_list{
+			display : block;
+		}
+		
+		&_item{
+			$padding : 8px;
+			width         : auto;
+			display       : block;
+			text-align    : center;
+			margin-top    : 56px;
+			padding-left  : $padding;
+			padding-right : $padding;
+			
+			&_title{
+				display    : block;
+				text-align : center;
+				
+				&:before{
+					margin  : 0 auto;
+					display : block !important;
+				}
+			}
+			
+			&_hr{
+				margin-left  : auto;
+				margin-right : auto;
+			}
+		}
+		
+		&_conclusion{
+			$padding : 8px;
+			padding-left  : $padding;
+			padding-right : $padding;
+		}
+	}
+	
+	.ours-effectively{
+		&_after-title{
+			font-size : 22px;
+		}
+		
+		&_list{
+			display : block;
+		}
+		
+		&_item{
+			$padding : 8px;
+			width          : auto;
+			display        : block;
+			text-align     : center;
+			margin-top     : 80px;
+			padding-left   : $padding;
+			padding-right  : $padding;
+			padding-bottom : 24px;
+			
+			&_title{
+				display    : block;
+				text-align : center;
+				
+				&:before{
+					margin  : 0 auto;
+					display : block !important;
+				}
+			}
+		}
+		
+		&_question{
+			width : 95%;
+		}
+	}
+	
+	.instruction{
+		&_img{ display : none; }
+		
+		&_content{
+			margin-top : 42px;
+		}
+		
+		&_list{
+			width      : 100%;
+			display    : block;
+			text-align : center;
+		}
+		
+		&_item{
+			display    : block;
+			padding    : 0;
+			margin-top : 18px;
+			
+			&:before{
+				display      : block;
+				margin-left  : auto;
+				margin-right : auto;
+			}
+			
+			span{
+				&:before{
+					margin   : 8px auto;
+					display  : block;
+					position : static;
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width : map_get($media, "tablet-max-width")){
+	body{
+		font-size : 14px;
+	}
+	
+	section{
+		padding : 64px 0;
+	}
+	
+	.container{
+		width        : calc(100% - 36px);
+		max-width    : 826px;
+		margin-left  : auto;
+		margin-right : auto;
+	}
+	
+	.first{
+		&_header{
+			&_wrapper{
+				width   : auto;
+				padding : 12px 0 0;
+			}
+			
+			&_achievements{
+				&_item{
+					flex-direction : column;
+					
+					&:before{
+						margin : 0 auto 6px;
+					}
+					
+					&_txt{
+						max-width  : none;
+						text-align : center;
+					}
+				}
+			}
+		}
+		
+		&_body{
+			flex-wrap   : wrap;
+			align-items : center;
+		}
+		
+		&_img{
+			margin  : 0 auto;
+			display : block;
+		}
+		
+		&_content{
+			width : 50%;
+		}
+	}
+	
+	.form{
+		margin   : 24px auto 0;
+		display  : inline-block;
+		position : static;
+	}
+	
+	.danger{
+		&_item{
+			&_title{
+				display    : block;
+				text-align : center;
+				
+				span{ padding : 0; }
+				
+				&:before{
+					display       : block !important;
+					margin-left   : auto;
+					margin-right  : auto;
+					margin-bottom : 12px;
+				}
+			}
+			
+			&_hr{
+				margin-top   : 16px;
+				margin-left  : auto;
+				margin-right : auto;
+			}
+			
+			&_description{
+				text-align : center;
+			}
+		}
+	}
+	
+	.many-inefficient{
+		&_conclusion{
+			$padding : 16px;
+			padding-left  : $padding;
+			padding-right : $padding;
+		}
+	}
+	
+	.ours-effectively{
+		&_question{
+			width : 100%;
+		}
+	}
+}

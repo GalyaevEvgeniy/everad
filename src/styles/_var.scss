@@ -1,0 +1,21 @@
+$colors : (
+		"gray": rgb(133, 133, 133),
+		"green": rgb(98, 189, 31),
+		"ivory": rgb(244, 211, 187),
+		"black": rgb(68, 68, 68),
+		"yellow": rgb(255, 203, 2),
+		"orange": rgb(255, 107, 0),
+		"gray_dark": rgb(102, 102, 102),
+		"blue_light": rgb(241, 249, 251),
+		"black_bold": rgb(56, 51, 52),
+		"green_light": rgb(168, 197, 58),
+);
+
+$media : (
+		"mobile-max-width": "767px",
+		"tablet-max-width": "1279px",
+);
+
+$desktop_max_width : 1168px;
+$form_width : 270px;
+$transition : .5s;
