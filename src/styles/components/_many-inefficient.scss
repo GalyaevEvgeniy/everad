@@ -1,0 +1,202 @@
+.many-inefficient{
+	&_list{
+		display         : flex;
+		margin-top      : 80px;
+		justify-content : space-between;
+	}
+	
+	&_item{
+		width            : 31.5%;
+		padding          : 63px 25px 35px;
+		position         : relative;
+		border-top       : 5px solid map_get($colors, "green_light");
+		text-align       : center;
+		box-sizing       : border-box;
+		transition       : $transition;
+		border-radius    : 7px;
+		background-color : white;
+		
+		$icon_size : 100px;
+		$count_items : 3;
+		$class-slug : icon-many-inefficient !default;
+		
+		@for $i from 1 through $count_items{
+			&:nth-child(#{$i}):before{
+				top              : $icon_size / -2;
+				left             : 50%;
+				width            : $icon_size;
+				height           : $icon_size;
+				content          : "";
+				position         : absolute;
+				transform        : translate(-50%, 0);
+				border-radius    : 50%;
+				background-color : map_get($colors, "blue_light");
+			}
+			
+			&:nth-child(#{$i}):after{
+				@extend %icon;
+				@extend .#{$class-slug}_#{$i};
+				top       : 0;
+				left      : 50%;
+				position  : absolute;
+				transform : translate(-50%, -50%);
+			}
+		}
+		
+		&_title{
+			display       : inline-block;
+			font-size     : 1.5em;
+			font-weight   : bold;
+			margin-bottom : 9px;
+			
+			&-after{
+				color         : rgb(34, 34, 34);
+				font-size     : 1.125em;
+				font-weight   : 600;
+				line-height   : 1.5;
+				margin-bottom : 47px;
+			}
+		}
+		
+		&_examples{
+			$line_height : 1.4em;
+			color       : map_get($colors, "black");
+			display     : block;
+			font-size   : 1em;
+			font-style  : italic;
+			min-height  : $line_height;
+			line-height : $line_height;
+			font-weight : 400;
+		}
+		
+		&_but{
+			$border : 1px solid rgb(210, 220, 230);
+			$top : -28px;
+			@extend .color-orange;
+			margin      : 53px 0 0;
+			position    : relative;
+			font-size   : 1.375em;
+			font-weight : 900;
+			
+			&:before{
+				top        : $top;
+				left       : 0;
+				width      : 100%;
+				content    : "";
+				display    : inline-block;
+				position   : absolute;
+				border-top : $border;
+			}
+			
+			&:after{
+				$size : 30px;
+				top              : $size / -2 + $top;
+				left             : calc(50% - #{$size / 2});
+				width            : $size;
+				height           : $size;
+				content          : "";
+				display          : inline-block;
+				position         : absolute;
+				transform        : rotate(45deg);
+				border-right     : $border;
+				border-bottom    : $border;
+				background-color : white;
+			}
+		}
+		
+		&_description{
+			color       : map_get($colors, "black");
+			margin      : 10px 0 0;
+			position    : relative;
+			font-size   : 1.125em;
+			line-height : 1.45;
+			
+			b{ color : black; }
+		}
+		
+		&:hover{
+			@extend %item_hover-effect;
+		}
+	}
+	
+	&_conclusion{
+		@extend %final-block;
+		margin     : 82px 0 0;
+		position   : relative;
+		text-align : center;
+		
+		&:before{
+			$border : 58px solid map_get($colors, "blue_light");
+			top              : 0;
+			left             : 50%;
+			color            : map_get($colors, "ivory");
+			content          : "!";
+			position         : absolute;
+			font-size        : 72px;
+			transform        : translate(-50%, -50%);
+			font-weight      : 700;
+			border-left      : $border;
+			border-right     : $border;
+			background-color : transparent;
+		}
+		
+		&:after{
+			top         : 0;
+			left        : 50%;
+			color       : black;
+			content     : "ВЫВОД";
+			position    : absolute;
+			transform   : translate(-50%, -50%);
+			font-weight : 700;
+		}
+	}
+}
+
+@media screen and (max-width : map_get($media, "mobile-max-width")){
+	.many-inefficient{
+		&_list{
+			display : block;
+		}
+		
+		&_item{
+			$padding : 8px;
+			width         : auto;
+			display       : block;
+			text-align    : center;
+			margin-top    : 56px;
+			padding-left  : $padding;
+			padding-right : $padding;
+			
+			&_title{
+				display    : block;
+				text-align : center;
+				
+				&:before{
+					margin  : 0 auto;
+					display : block !important;
+				}
+			}
+			
+			&_hr{
+				margin-left  : auto;
+				margin-right : auto;
+			}
+		}
+		
+		&_conclusion{
+			$padding : 8px;
+			padding-left  : $padding;
+			padding-right : $padding;
+		}
+	}
+}
+
+@media screen and (max-width : map_get($media, "tablet-max-width")){
+	.many-inefficient{
+		&_conclusion{
+			$padding : 16px;
+			padding-left  : $padding;
+			padding-right : $padding;
+		}
+	}
+}

@@ -1,0 +1,258 @@
+.form{
+	$vertical_offset : 16px;
+	$border_size : 7px;
+	$border_radius : 20px;
+	$border : $border_size solid map_get($colors, "green_light") ;
+	top              : 5px;
+	right            : 0;
+	width            : $form_width;
+	border           : $border;
+	padding          : 0 $vertical_offset;
+	position         : absolute;
+	text-align       : center;
+	box-sizing       : border-box;
+	border-radius    : $border_radius;
+	background-color : white;
+	
+	&_header{
+		width          : 138px;
+		margin         : -$border_size auto 0;
+		z-index        : 1;
+		position       : relative;
+		border-radius  : 0 0 $border_radius $border_radius;
+		padding-bottom : 10px;
+		
+		&_txt{
+			&:before{
+				@extend %icon;
+				@extend .icon-form_delivery;
+				margin-right : 6px;
+			}
+		}
+		
+		&:before{
+			top              : 0;
+			left             : 0;
+			width            : 100%;
+			height           : 100%;
+			content          : "";
+			z-index          : -1;
+			display          : block;
+			position         : absolute;
+			border-radius    : 0 0 $border_radius * .75 $border_radius * .75;
+			background-color : map_get($colors, "blue_light");
+		}
+		
+		&:after{
+			top              : 0;
+			left             : -$border_size;
+			width            : calc(100% + #{$border_size * 2});
+			height           : calc(100% + #{$border_size});
+			content          : "";
+			z-index          : -2;
+			display          : block;
+			position         : absolute;
+			border-radius    : 0 0 $border_radius $border_radius;
+			background-color : map_get($colors, "green_light");
+		}
+	}
+	
+	&_title{
+		margin-top     : 24px;
+		letter-spacing : .5px;
+	}
+	
+	&_price{
+		margin          : 10px 0 14px;
+		display         : flex;
+		position        : relative;
+		justify-content : space-around;
+		
+		&_value{
+			font-size  : 2.125em;
+			margin-top : 5px;
+			
+			span{
+				&:after{
+					content : "₽";
+				}
+			}
+		}
+		
+		&_old, &_new{ width : 46%; }
+		
+		&_old{
+			.form_price_value{
+				$angle : 12.5deg;
+				position : relative;
+				
+				&:before, &:after{
+					$height : 1px;
+					top              : calc(50% - #{$height / 2});
+					left             : 6%;
+					width            : 85%;
+					height           : $height;
+					content          : "";
+					display          : block;
+					position         : absolute;
+					background-color : red;
+				}
+				
+				&:before{ transform : rotateZ($angle); }
+				
+				&:after{ transform : rotateZ(-$angle); }
+			}
+		}
+		
+		&_new{
+			.form_price_txt{ font-weight : 600; }
+			
+			.form_price_value{
+				font-weight      : 900;
+				border-radius    : 5px;
+				background-color : map_get($colors, "yellow");
+			}
+		}
+		
+		&:after{
+			@extend %icon;
+			@extend .icon-form_arrow;
+			top      : 42px;
+			right    : -50px;
+			position : absolute;
+		}
+	}
+	
+	&_label{
+		display    : block;
+		position   : relative;
+		margin-top : 12px;
+		
+		&.submit{
+			$inner_border_radius : 32px;
+			cursor           : pointer;
+			padding          : 18px 0;
+			position         : relative;
+			font-size        : 1.75em;
+			transition       : $transition;
+			font-weight      : bold;
+			line-height      : 0.786;
+			border-radius    : $inner_border_radius;
+			background-color : map_get($colors, "yellow");
+			
+			small{
+				display    : block;
+				font-size  : 0.575em;
+				margin-top : 3px;
+			}
+			
+			input{
+				top      : 0;
+				left     : 0;
+				width    : 100%;
+				height   : 100%;
+				opacity  : 0;
+				position : absolute;
+			}
+			
+			&:after{
+				top           : $border_size;
+				left          : $border_size;
+				width         : calc(100% - #{$border_size * 2});
+				height        : calc(100% - #{$border_size * 2});
+				border        : 1px solid white;
+				content       : "";
+				display       : block;
+				position      : absolute;
+				border-radius : $inner_border_radius;
+			}
+			
+			&:hover{
+				transform  : scale(1.05);
+				box-shadow : 0 0 15px 3px map_get($colors, "yellow");
+			}
+		}
+		
+		&.name, &.phone{
+			&:before{
+				@extend %icon;
+				top       : 50%;
+				left      : 23px;
+				position  : absolute;
+				transform : translate(0, -50%);
+			}
+		}
+		
+		&.name{
+			&:before{ @extend .icon-form_name; }
+		}
+		
+		&.phone{
+			&:before{ @extend .icon-form_phone; }
+		}
+	}
+	
+	&_input:not(.submit){
+		$padding_vertical : 23px;
+		$padding_left : 55px;
+		$padding_right : 25px;
+		width            : 100%;
+		border           : none;
+		padding          : $padding_vertical 25px $padding_vertical 55px;
+		outline          : none;
+		transition       : $transition;
+		box-sizing       : border-box;
+		border-radius    : 100px;
+		background-color : map_get($colors, "blue_light");
+		
+		&:hover, :active{
+			box-shadow : inset 0 0 10px 0 rgba(0, 0, 0, .2);
+		}
+	}
+	
+	&_left{
+		color       : map_get($colors, "black_bold");
+		font-size   : 1.125em;
+		margin-top  : 19px;
+		line-height : 1;
+		
+		var{
+			color      : map_get($colors, "green");
+			font-style : normal;
+		}
+	}
+	
+	&_footer{
+		color            : map_get($colors, "gray_dark");
+		margin           : 14px #{-$vertical_offset} 0;
+		padding          : 13px $vertical_offset;
+		font-size        : .875em;
+		line-height      : 1.18;
+		border-radius    : 0 0 $border_radius $border_radius;
+		background-color : map_get($colors, "blue_light");
+		
+		&_txt{
+			&:before{
+				@extend %icon;
+				@extend .icon-form_protected;
+				margin : 0 12px -4px 0;
+			}
+		}
+	}
+}
+
+@media screen and (max-width : map_get($media, "mobile-max-width")){
+	.form{
+		margin   : 24px auto 0;
+		display  : block;
+		position : static;
+	}
+}
+
+@media screen and (max-width : map_get($media, "tablet-max-width")){
+	.form{
+		margin   : 24px auto 0;
+		display  : inline-block;
+		position : static;
+	}
+}

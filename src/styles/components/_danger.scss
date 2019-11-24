@@ -1,0 +1,158 @@
+.danger{
+	text-align : center;
+	
+	&_title-after{
+		color       : rgb(43, 40, 40);
+		display     : inline-block;
+		font-size   : 1.5em;
+		margin-top  : 34px;
+		font-weight : bold;
+		line-height : 1.167;
+	}
+	
+	&_list{
+		display         : flex;
+		margin-top      : 28px;
+		justify-content : space-between;
+	}
+	
+	&_item{
+		$icon_size : 188px;
+		$count_items : 3;
+		$class-slug : icon-danger !default;
+		width      : 30%;
+		transition : $transition;
+		text-align : left;
+		
+		@for $i from 1 through $count_items{
+			&:nth-child(#{$i}) &_title:before{
+				@extend %icon;
+				@extend .#{$class-slug}_#{$i};
+			}
+		}
+		
+		&_title{
+			color       : rgb(0, 0, 0);
+			display     : flex;
+			font-size   : 1.357em;
+			text-align  : left;
+			box-sizing  : border-box;
+			line-height : 1.182;
+			font-weight : 600;
+			align-items : center;
+			
+			span{
+				width        : calc(100% - #{$icon_size});
+				margin-top   : 28px;
+				box-sizing   : border-box;
+				padding-left : 18px;
+			}
+		}
+		
+		&_hr{
+			width            : 50px;
+			margin           : 30px 0 0;
+			border           : none;
+			height           : 4px;
+			display          : block;
+			background-color : rgb(190, 203, 216);
+		}
+		
+		&_description{
+			color       : map_get($colors, "black");
+			margin      : 12px 0 0;
+			font-size   : 1.125em;
+			line-height : 1.556;
+		}
+		
+		&:hover{
+			@extend %item_hover-effect;
+		}
+	}
+	
+	&_statistic{
+		@extend %final-block;
+		margin   : 70px 0 0;
+		position : relative;
+		
+		&:before{
+			@extend %icon;
+			@extend .icon-statistic;
+			$border : 58px solid white;
+			top              : 0;
+			left             : 50%;
+			position         : absolute;
+			transform        : translate(-50%, -50%);
+			border-left      : $border;
+			border-right     : $border;
+			background-color : white;
+		}
+	}
+}
+
+@media screen and (max-width : map_get($media, "mobile-max-width")){
+	.danger{
+		&_title-after{ font-size : 22px; }
+		
+		&_list{ display : block; }
+		
+		&_item{
+			width      : auto;
+			display    : block;
+			text-align : center;
+			margin-top : 24px;
+			
+			&_title{
+				display    : block;
+				text-align : center;
+				
+				&:before{
+					margin  : 0 auto 8px;
+					display : block !important;
+				}
+			}
+			
+			&_hr{
+				margin-left  : auto;
+				margin-right : auto;
+				margin-top   : 12px;
+			}
+		}
+		
+		&_statistic{
+			$padding : 12px;
+			padding-left  : $padding;
+			padding-right : $padding;
+		}
+	}
+}
+
+@media screen and (max-width : map_get($media, "tablet-max-width")){
+	.danger{
+		&_item{
+			&_title{
+				display    : block;
+				text-align : center;
+				
+				span{ padding : 0; }
+				
+				&:before{
+					display       : block !important;
+					margin-left   : auto;
+					margin-right  : auto;
+					margin-bottom : 12px;
+				}
+			}
+			
+			&_hr{
+				margin-top   : 16px;
+				margin-left  : auto;
+				margin-right : auto;
+			}
+			
+			&_description{
+				text-align : center;
+			}
+		}
+	}
+}

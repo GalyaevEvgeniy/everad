@@ -1,0 +1,275 @@
+.first{
+	$top_offset : 46px;
+	position       : relative;
+	padding-top    : 0;
+	padding-bottom : 159px;
+	
+	&:before{ content : none; }
+	
+	&_header{
+		padding  : 0 calc((100% - #{$desktop_max_width}) / 2);
+		z-index  : 2;
+		position : relative;
+		
+		&_wrapper{
+			width       : $desktop_max_width;
+			display     : flex;
+			padding     : 14px 0 0 222px;
+			position    : relative;
+			box-sizing  : border-box;
+			line-height : 1.125;
+		}
+		
+		&_logo{
+			width           : 400px;
+			display         : flex;
+			flex-wrap       : nowrap;
+			align-items     : center;
+			justify-content : flex-start;
+			
+			&:before{
+				@extend %icon;
+				@extend .icon-fungus;
+				margin-right : 16px;
+			}
+			
+			&_txt{
+				color       : map_get($colors, "black_bold");
+				font-size   : 1.375em;
+				line-height : 1.818;
+				font-weight : 600;
+				
+			}
+		}
+		
+		&_achievements{
+			&_list{
+				color           : map_get($colors, "gray_dark");
+				display         : flex;
+				font-style      : italic;
+				text-align      : center;
+				line-height     : 1.125;
+				justify-content : space-between;
+			}
+			
+			&_item{
+				$count_items : 3;
+				$class-slug : icon-header_achievement !default;
+				display         : flex;
+				flex-direction  : row;
+				justify-content : space-around;
+				
+				&:before{
+					@extend %icon;
+				}
+				
+				@for $i from 1 through $count_items{
+					&:nth-child(#{$i}):before{
+						@extend .#{$class-slug}_#{$i};
+					}
+				}
+				
+				&_txt{
+					display      : inline-block;
+					max-width    : 75%;
+					text-align   : left;
+					padding-left : 12px;
+				}
+			}
+		}
+	}
+	
+	&_body{
+		margin     : 46px auto 0;
+		display    : flex;
+		position   : relative;
+		max-width  : $desktop_max_width;
+		box-sizing : border-box;
+		text-align : left;
+	}
+	
+	&_bg-img_desk{ display : none; }
+	
+	&_img, &_content{ width : 50%; }
+	
+	@media screen and (min-width : 1280px){
+		&_bg-img_mob{ display : none; }
+		
+		&_img{
+			width    : 42.5%;
+			display  : block;
+			z-index  : 1;
+			position : relative;
+		}
+		
+		&_bg-img_desk{
+			$bottom : 168px;
+			$header_height : 103px;
+			width    : auto;
+			right    : -142px;
+			height   : calc(100% + #{$top_offset + $bottom + $header_height});
+			bottom   : -$bottom;
+			display  : block;
+			z-index  : -1;
+			position : absolute;
+		}
+	}
+	
+	&_content{
+		width    : 396px;
+		z-index  : 1;
+		position : relative;
+	}
+	
+	&_advantages{
+		$list-style_size : 46px;
+		$list-style_offset : 26px;
+		font-size  : 20px;
+		margin-top : 42px;
+		
+		&_list{
+			&-type{
+				color            : white;
+				width            : $list-style_size;
+				height           : $list-style_size;
+				display          : inline-block;
+				box-shadow       : 0 0 0 7px rgb(232, 237, 201);
+				text-align       : center;
+				line-height      : $list-style_size;
+				font-weight      : 700;
+				margin-left      : 10px;
+				margin-right     : $list-style_offset;
+				border-radius    : 50%;
+				background-color : map_get($colors, "green_light");
+			}
+		}
+		
+		&_item{
+			display     : flex;
+			margin-top  : 36px;
+			align-items : center;
+			
+			&:first-child{ margin-top : 0; }
+			
+			&:nth-child(2){
+				$offset : -50%;
+				position : relative;
+				
+				&:before, &:after{
+					@extend %icon;
+					left     : 28px;
+					position : absolute;
+				}
+				
+				&:before{
+					@extend .icon-first_list-type_arrow;
+					top : $offset;
+				}
+				
+				&:after{
+					@extend .icon-first_list-type_plus;
+					bottom : $offset;
+				}
+			}
+		}
+		
+		&_txt{
+			width       : calc(100% - #{$list-style_size + $list-style_offset});
+			color       : map_get($colors, "black");
+			line-height : 1.2;
+		}
+	}
+}
+
+@media screen and (max-width : map_get($media, "mobile-max-width")){
+	.first{
+		padding-bottom : 46px;
+		
+		&_header{
+			padding    : 0;
+			text-align : center;
+			
+			&_wrapper{
+				width   : auto;
+				padding : 0;
+			}
+			
+			&_logo{
+				width           : 100%;
+				justify-content : center;
+			}
+			
+			&_achievements{
+				&_list{
+					display : none;
+				}
+			}
+		}
+		
+		&_body{
+			display   : block;
+			max-width : none;
+		}
+		
+		&_img, &_content{ width : auto; }
+		
+		&_advantages{
+			&_item{
+				&:nth-child(2){
+					$offset : -85%;
+					
+					&:before, &:after{
+						left     : 28px;
+						position : absolute;
+					}
+					
+					&:before{ top : $offset; }
+					
+					&:after{ bottom : $offset; }
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width : map_get($media, "tablet-max-width")){
+	.first{
+		padding-bottom : 64px;
+		
+		&_header{
+			&_wrapper{
+				width   : auto;
+				padding : 12px 0 0;
+			}
+			
+			&_achievements{
+				&_item{
+					flex-direction : column;
+					
+					&:before{
+						margin : 0 auto 6px;
+					}
+					
+					&_txt{
+						max-width  : none;
+						text-align : center;
+					}
+				}
+			}
+		}
+		
+		&_body{
+			flex-wrap   : wrap;
+			align-items : center;
+		}
+		
+		&_img{
+			margin  : 0 auto;
+			display : block;
+		}
+		
+		&_content{
+			width : 50%;
+		}
+	}
+}

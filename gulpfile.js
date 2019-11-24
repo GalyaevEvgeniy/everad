@@ -1,21 +1,33 @@
 const gulp = require("gulp");
-const sass = require("gulp-sass"); // Компиляция SCSS в CSS
-const gcmq = require("gulp-group-css-media-queries"); // Групировка одинаковых Media Queries
-const cssmin = require('gulp-cssmin');
-const htmlmin = require('gulp-htmlmin');
-const sprite = require('gulp.spritesmith');
-const autoprefixer = require("gulp-autoprefixer"); // Автоматическое добавление в CSS вендорных префиксов
+const sass = require("gulp-sass");
+const gcmq = require("gulp-group-css-media-queries");
+const cssmin = require("gulp-cssmin");
+const minify = require("gulp-minify");
+const babel = require("gulp-babel");
+const concat = require("gulp-concat");
+const htmlmin = require("gulp-htmlmin");
+const sprite = require("gulp.spritesmith");
+const autoprefixer = require("gulp-autoprefixer");
 
 //==================
 // Пути к файлам
 const paths = {
 	styles: {
-		files: "./src/styles/*.scss",
+		files: "./src/styles/**/*.scss",
 		dest: "./public/styles/",
 	},
 	html:{
 		files: "./src/html/*.html",
 		dest: "./public/"
+	},
+	js:{
+		files: "./src/scripts/**/*.js",
+		dest: "./public/scripts/",
+		arr_files: [
+			"./src/scripts/libs/polyfills.js",
+			"./src/scripts/libs/custom_onEvent.js",
+			"./src/scripts/main.js",
+		]
 	},
 	icons:{
 		files: "./src/icons/*",
@@ -40,7 +52,20 @@ gulp.task("generate_css", function(){
 
 //========================================
 //
-gulp.task('minify_html', function(){
+gulp.task("minify_js", function(){
+	return gulp
+		.src(paths.js.arr_files)
+		.pipe(babel({
+			presets: ['@babel/env']
+		}))
+		.pipe(concat("main.js"))
+		.pipe(minify())
+		.pipe(gulp.dest(paths.js.dest));
+});
+
+//========================================
+//
+gulp.task("minify_html", function(){
 	return gulp
 		.src(paths.html.files)
 		.pipe(htmlmin({ collapseWhitespace: true }))
@@ -49,7 +74,7 @@ gulp.task('minify_html', function(){
 
 //==================================
 //
-gulp.task('sprite', function(){
+gulp.task("sprite", function(){
 	return gulp
 		.src(paths.icons.files)
 		.pipe(sprite({
@@ -63,7 +88,7 @@ gulp.task('sprite', function(){
 //=======================================
 //
 gulp.task("build", async function(){
-	gulp.series("minify_html", "generate_css")();
+	gulp.series("minify_html", "generate_css", "minify_js")();
 });
 
 //=================================
@@ -71,4 +96,5 @@ gulp.task("build", async function(){
 gulp.task("watch", function(){
 	gulp.watch(paths.styles.files).on("change", gulp.series("generate_css"));
 	gulp.watch(paths.html.files).on("change", gulp.series("minify_html"));
+	gulp.watch(paths.js.files).on("change", gulp.series("minify_js"));
 });

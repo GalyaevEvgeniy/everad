@@ -1,0 +1,149 @@
+.ours-effectively{
+	text-align : center;
+	
+	&_after-title{
+		@extend .danger_title-after;
+	}
+	
+	&_list{
+		display         : flex;
+		margin-top      : 88px;
+		justify-content : space-between;
+	}
+	
+	&_item{
+		$icon_size : 120px;
+		$count_items : 3;
+		$vertical_padding : 10px;
+		$class-slug : icon-ours-effectively !default;
+		width         : calc(30% + #{$vertical_padding * 2});
+		border        : 4px solid map_get($colors, "orange");
+		padding       : 76px $vertical_padding 28px;
+		position      : relative;
+		box-sizing    : border-box;
+		transition    : $transition;
+		border-radius : 5px;
+		
+		&:before{
+			@extend .many-inefficient_item:before;
+		}
+		
+		&:after{
+			@extend .many-inefficient_item:after;
+		}
+		
+		@for $i from 1 through $count_items{
+			&:nth-child(#{$i}):before{
+				top              : $icon_size / -2;
+				left             : 50%;
+				width            : $icon_size;
+				height           : $icon_size;
+				content          : "";
+				position         : absolute;
+				transform        : translate(-50%, 0);
+				border-radius    : 50%;
+				background-color : white;
+			}
+			
+			&:nth-child(#{$i}):after{
+				@extend %icon;
+				@extend .#{$class-slug}_#{$i};
+				top       : 0;
+				left      : 50%;
+				position  : absolute;
+				transform : translate(-50%, calc(-50% - 18px))
+			}
+		}
+		
+		&_title{
+			display     : block;
+			font-size   : 1.5em;
+			font-weight : bold;
+			line-height : 1.167;
+		}
+		
+		&_description{
+			display     : block;
+			font-size   : 1.125em;
+			margin-top  : 10px;
+			line-height : 1.444;
+		}
+		
+		&:last-child{ border-color : map_get($colors, "green"); }
+		
+		&:hover{
+			@extend %item_hover-effect;
+		}
+	}
+	
+	&_question{
+		$border_radius : 5px;
+		width         : 72.5%;
+		margin        : 32px auto 0;
+		padding       : 32px 0;
+		position      : relative;
+		font-size     : 1.6875em;
+		line-height   : 0.982;
+		background    : white;
+		border-radius : $border_radius;
+		
+		:after{
+			$border_size : 4px;
+			top           : -$border_size;
+			left          : -$border_size;
+			width         : calc(100% + #{$border_size * 2});
+			height        : calc(100% + #{$border_size * 2});
+			content       : "";
+			display       : block;
+			z-index       : -1;
+			position      : absolute;
+			background    : linear-gradient(45deg, map_get($colors, "orange"), map_get($colors, "green"));
+			border-radius : $border_radius;
+		}
+	}
+}
+
+@media screen and (max-width : map_get($media, "mobile-max-width")){
+	.ours-effectively{
+		&_after-title{
+			font-size : 22px;
+		}
+		
+		&_list{
+			display : block;
+		}
+		
+		&_item{
+			$padding : 8px;
+			width          : auto;
+			display        : block;
+			text-align     : center;
+			margin-top     : 80px;
+			padding-left   : $padding;
+			padding-right  : $padding;
+			padding-bottom : 24px;
+			
+			&_title{
+				display    : block;
+				text-align : center;
+				
+				&:before{
+					margin  : 0 auto;
+					display : block !important;
+				}
+			}
+		}
+		
+		&_question{
+			width : 95%;
+		}
+	}
+}
+
+@media screen and (max-width : map_get($media, "tablet-max-width")){
+	.ours-effectively{
+		&_question{
+			width : 100%;
+		}
+	}
+}

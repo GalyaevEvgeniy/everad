@@ -1,0 +1,105 @@
+.instruction{
+	&_img{
+		img{
+			float : right;
+			width : auto;
+		}
+	}
+	
+	&_content{
+		display    : flex;
+		margin-top : 106px;
+	}
+	
+	&_img, &_list{
+		width : 50%;
+	}
+	
+	&_list{
+		margin-top : -28px;
+		text-align : left;
+	}
+	
+	&_item{
+		display      : flex;
+		font-size    : 1.125em;
+		transition   : $transition;
+		margin-top   : 16px;
+		line-height  : 1.444;
+		align-items  : center;
+		padding-left : 20px;
+		
+		&:before{
+			@extend %icon;
+			margin-right : 28px;
+		}
+		
+		$icon_size : 100px;
+		$count_items : 3;
+		$class-slug : icon-instruction !default;
+		
+		@for $i from 1 through $count_items{
+			&:nth-child(#{$i}):before{
+				@extend .#{$class-slug}_#{$i};
+			}
+		}
+		
+		span{
+			display  : inline-block;
+			position : relative;
+			
+			&:before{
+				top              : -16px;
+				left             : 0;
+				width            : 20px;
+				height           : 3px;
+				content          : "";
+				display          : block;
+				position         : absolute;
+				background-color : map_get($colors, "green");
+			}
+		}
+		
+		&:first-child{
+			margin-top : 0;
+		}
+		
+		&:hover{ @extend %item_hover-effect; }
+	}
+}
+
+@media screen and (max-width : map_get($media, "mobile-max-width")){
+	.instruction{
+		&_img{ display : none; }
+		
+		&_content{
+			margin-top : 42px;
+		}
+		
+		&_list{
+			width      : 100%;
+			display    : block;
+			text-align : center;
+		}
+		
+		&_item{
+			display    : block;
+			padding    : 0;
+			margin-top : 18px;
+			
+			&:before{
+				display      : block;
+				margin-left  : auto;
+				margin-right : auto;
+			}
+			
+			span{
+				&:before{
+					margin   : 8px auto;
+					display  : block;
+					position : static;
+				}
+			}
+		}
+	}
+}

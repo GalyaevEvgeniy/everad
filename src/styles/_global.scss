@@ -1,0 +1,135 @@
+
+.clearfix:after{
+	clear   : both;
+	content : "";
+	display : table;
+}
+
+.color-orange{ color : map_get($colors, "orange"); }
+
+%item_hover-effect{
+	transform : translateY(-4px);
+}
+
+%icon{
+	content : "";
+	display : inline-block;
+}
+
+%underline{
+	display     : inline-block;
+	position    : relative;
+	line-height : .85;
+	
+	&:after{
+		width   : 100%;
+		height  : 4px;
+		content : "";
+		display : block;
+	}
+}
+
+.underline-orange{
+	@extend %underline;
+	
+	&:after{ background-color : map_get($colors, "orange"); }
+}
+
+.underline-green{
+	@extend %underline;
+	
+	&:after{ background-color : map_get($colors, "green"); }
+}
+
+%final-block{
+	color         : map_get($colors, "black");
+	border        : 3px solid map_get($colors, "ivory");
+	padding       : 40px 68px 38px;
+	position      : relative;
+	font-size     : 1.3125em;
+	line-height   : 1.273;
+	border-radius : 5px;
+}
+
+body{
+	font-size   : 16px;
+	font-family : "Roboto", sans-serif;
+}
+
+h1, h2, h3{ margin : 0; }
+
+h1{
+	color       : map_get($colors, "black_bold");
+	font-size   : 2.75em;
+	line-height : 1;
+	
+	small{
+		display    : block;
+		font-size  : 73%;
+		margin-top : 5px;
+	}
+}
+
+h2{
+	color       : map_get($colors, "black_bold");
+	font-size   : 3em;
+	text-align  : center;
+	line-height : 1;
+}
+
+section{
+	padding    : 92px 0;
+	position   : relative;
+	text-align : center;
+	
+	&:nth-child(2n - 1){
+		background-color : map_get($colors, "blue_light");
+	}
+	
+	&:before{
+		$offset : 18px;
+		@extend %icon;
+		@extend .icon-fungus;
+		margin-bottom : $offset;
+	}
+}
+
+.container{
+	margin    : 0 auto;
+	max-width : $desktop_max_width;
+}
+
+@media screen and (max-width : map_get($media, "mobile-max-width")){
+	html{
+		width    : 100vw;
+		overflow : hidden auto;
+	}
+	
+	body{ font-size : 14px; }
+	
+	section{ padding : 46px 0; }
+	
+	h1{ text-align : center; }
+	
+	h2{ font-size : 2em; }
+	
+	.container{
+		width     : calc(100% - 24px);
+		max-width : 480px;
+	}
+}
+
+@media screen and (max-width : map_get($media, "tablet-max-width")){
+	body{
+		font-size : 14px;
+	}
+	
+	section{
+		padding : 64px 0;
+	}
+	
+	.container{
+		width: calc(100% - 36px);
+		max-width: 826px;
+	}
+}
